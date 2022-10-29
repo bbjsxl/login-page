@@ -102,7 +102,7 @@
             document.cookie = cname + "=" + cvalue + "; " + expires;
         }
         function exist(id, password) {
-            fetch('http://123.60.44.50:3000/users')
+            fetch('https://db.api.orght.cn/users')
                 .then(response => response.json())
                 .then(
                     data => {
