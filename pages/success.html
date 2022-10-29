@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录成功</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        #info{
+            width: 250px;
+            height: 120px;
+            border-radius: 15px;
+            box-shadow: 2px 2px rgb(241, 240, 240), -2px -2px rgb(241, 240, 240);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="info">
+        <div>
+            账户：
+        </div>
+        <div>
+            昵称：
+        </div>
+    </div>
+
+    <script>
+        /**
+         * 获取 cookie 对象
+         * @returns  cookie 键值对对象
+         */
+        function getCookieObject() {
+            let cookieString = document.cookie;
+            cookieString = cookieString.substring(0, cookieString.length);
+            let tempCookieArray = cookieString.split('; ');
+
+            let cookieObject = {}; // 存放 cookie 键值对
+
+            tempCookieArray.forEach(item => {
+                let name = item.substring(0, item.indexOf('='));
+                let value = item.substring(item.indexOf('=') + 1);
+                value = decodeURIComponent(value); // 还原字符串
+                cookieObject[name] = value; // 将键值插入中这个对象中
+            });
+
+            return cookieObject // 返回包含 cookie 键值对的对象
+        }
+        let user = getCookieObject();
+        let info = document.getElementById("info");
+        let infoChild = info.children;
+        infoChild[0].innerHTML = infoChild[0].innerHTML + user.id;
+        infoChild[1].innerHTML = infoChild[1].innerHTML + user.name;
+    </script>
+</body>
+
+</html>
